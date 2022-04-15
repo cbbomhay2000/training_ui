@@ -23,6 +23,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/resetpassword', [App\Http\Controllers\HomeController::class, 'reset'])->name('reset');
+
+Route::post('/change/password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('profile.change.password');
 
 
 
@@ -40,3 +43,5 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+//reset password
