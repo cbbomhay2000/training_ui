@@ -10,14 +10,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        
-        $post = Post::with('category')->orderBy('post_id', 'DESC')->get();
-        return view('admincp.post.index')->with(compact('post'));
+        $posts = Post::with('category')->orderBy('created_at', 'DESC')->get();
+        return view('admincp.post.index')->with(compact('posts'));
     }
     
     public function create()
     {
-        $category = Category::orderBy('cate_id', 'DESC')->get();
+        $category = Category::orderBy('created_at', 'DESC')->get();
         return view('admincp.post.create_post')->with(compact('category'));
     }
 

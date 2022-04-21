@@ -22,13 +22,13 @@
                             </thead>
                             <tbody>
                                 @foreach ($categories as $category)
+                                {{dd($category)}}
                                     <tr>
-                                        {{-- <th scope="row">{{ $key }}</th> --}}
                                         <td>{{ $category->cate_name }}
                                         <td>
                                             <a class="btn btn-success"
-                                                href="{{ route('category.edit',  [$category->cate_id]   ) }}">Edit</a>
-                                            <form action="{{ route('category.destroy', [$category->cate_id]) }}"
+                                                href="{{ route('category.edit', $category) }}">Edit</a>
+                                            <form action="{{ route('category.destroy', $category) }}"
                                                 method="POST">
                                                 @method('DELETE')
                                                 @csrf
@@ -39,6 +39,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="clearfix w-100">
+                        <div class="d-flex justify-content-center">
+                            {{-- {!! $category->links() !!} --}}
+                        </div>
                     </div>
                 </div>
             </div>

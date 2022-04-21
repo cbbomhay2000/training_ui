@@ -27,7 +27,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        aria-describedby="emailHelp" placeholder="Tiêu đề bài viết" name="name_post"
+                                        aria-describedby="emailHelp" placeholder=" đề bài viết" name="name_post"
                                         value="{{ old('name_post') }}">
                                 </div>
                                 <div class="form-group">
@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <select name="cate_id" class="form-control custom-select">
                                         @foreach ($category as $key => $cate)
-                                            <option value="{{ $cate->cate_id }}">
+                                            <option value="{{ $cate->id }}">
                                                 {{ $cate->cate_name }}
                                             </option>
                                         @endforeach

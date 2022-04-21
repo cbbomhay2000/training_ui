@@ -14,6 +14,6 @@ class Category extends Model
     protected $table = 'categories';
 
     public function posṭ(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany(Post::class, 'cate_id');
     }
 }

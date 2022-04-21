@@ -8,12 +8,12 @@
                     <div class="card-header">{{ __('Cập nhập Danh mục bài viết') }}</div>
                     <div class="card-body">
                         <form autocapitalize="off" method="POST"
-                            action="{{ route('category.update'), [$category->cate_id] }}">
+                            action="{{ route('category.update', $category) }}">
                             @method('PUT')
                             @csrf
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tiêu đề danh mục</label>
-                                <input type="text" class="form-control" name="cateName" value="{{ $category->cateName }}"
+                                <label for="exampleInputEmail1"> đề danh mục</label>
+                                <input type="text" class="form-control" name="cate_name" value="{{ $category->cate_name }}"
                                     required>
                             </div><br>
                             <button type="submit" class="btn btn-primary">Cập nhập danh mục</button>

@@ -19,7 +19,7 @@
                             @endif
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tiêu đề danh mục</label>
-                                <input type="text" class="form-control" name="cateName" placeholder="Tiêu đề...."
+                                <input type="text" class="form-control" name="cate_name" placeholder="Tiêu đề...."
                                     @error('confirm_password') is-invalid @enderror required>
                             </div><br>
                             <button type="submit" class="btn btn-primary">Thêm danh mục</button>

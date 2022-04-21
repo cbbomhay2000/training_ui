@@ -14,19 +14,19 @@
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">#</th>
                                     <th scope="col">Tên bài viết</th>
-                                    <th scope="col">Danh muc</th>
+                                    <th scope="col">Danh Muc</th>
+                                    <th scope="col">Thao Tac</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($post as $key => $value)
+                                @foreach ($posts as $post)
                                     <tr>
-                                        <th scope="row">{{ $key }}</th>
-                                        <td>{{ $value->name_post }}</td>
-                                        {{-- <td>{{ $value->category->cate_name }}</td> --}}
+                                        {{-- <th scope="row">{{ $key }}</th> --}}
+                                        <td>{{ $post->name_post }}</td>
+                                        <td>{{ $post->category->cate_name }}</td>
                                         <td>
-                                            <form action="{{ route('post.destroy', [$value->post_id]) }}" method="POST">
+                                            <form action="{{ route('post.destroy', $post) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <input class="btn btn-danger" type="submit" value="Delete" />

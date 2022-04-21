@@ -1,60 +1,58 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\CategoryRequest;
+
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Services\CategoryService;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     public function index()
     {
-        $categories = Category::orderBy('cate_id', 'DESC')->get();
-        return view('admincp.category.index')->with(compact('categories'));
+        $this->viewData['categories'] = $this->categoryService->listCategory();
+
+        return view('admincp.category.index', $this->viewData);
     }
 
     public function create()
     {
-      return view('admincp.category.create');
+        return view('admincp.category.create');
     }
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        $category = new Category();
-        $category->cate_name = $data['cateName'];
-        $category->save();
-        return redirect()->back()->with('success', 'Thêm thành công');
-    
-    }
+        if ($this->categoryService->create($request->all())) {
+            return redirect()->back()->with('success', 'Them moi thành công');
+        }
 
-    public function show(Request $request,$id)
-    { 
-       
+        return redirect()->back()->with('failed', 'Them moi k thành công');
     }
 
     public function edit(Category $category)
     {
-        dd($category);
-        // $category = Category::find($id);
-        return view('admincp.category.show')->with(compact('category'));
+        return view('admincp.category.show', compact('category'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category) // form request va model binding
     {
-        $data = $request->all();
-        $category = Category::find('cate_id',$id);
-        $category->cate_name = $data['cateName'];
-        $category->save();
-        return redirect()->back()->with('success', 'Sửa thành công');
-    
+        if ($this->categoryService->update($category, $request->all())) {
+            return redirect()->back()->with('success', 'Sửa thành công');
+        }
+
+        return redirect()->back()->with('failed', 'Sửa thất bại');
     }
 
-    public function destroy(Request $request, $id)
-    { 
-        Category::where('cate_id',$id)->delete();
+    public function destroy(Request $request)
+    {
+        // Category::where('cate_id',$id)->delete();
         return back()->with('success', 'Xóa thành công');
     }
-} 
+}

@@ -13,6 +13,6 @@ class Post extends Model
         protected $table = 'posts';
 
         public function category(){
-            return $this->belongsTo('App\Models\Category');
+            return $this->belongsTo(Category::class, 'cate_id');
         }
 }
