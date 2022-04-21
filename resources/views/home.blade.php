@@ -12,8 +12,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{ __('You are logged in!') }}
-                </div>
+                     <a class="btn btn-primary" href="{{ route('category.create') }}">Thêm danh mục</a>
+                     <a class="btn btn-success" href="{{ route('category.index') }}">Danh sách danh mục</a>
+                    <a class="btn btn-primary" href="{{ route('post.create') }}">Viết bài</a>
+                     <a class="btn btn-primary" href="{{ route('post.index') }}">Liet ke bai viet</a>
+                </div>      
             </div>
         </div>
     </div>
