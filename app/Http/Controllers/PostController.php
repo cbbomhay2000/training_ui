@@ -1,56 +1,53 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
-
+use App\Services\PostService;
 class PostController extends Controller
 {
-    public function index()
+    public function __construct(PostService $postService)
     {
-        $posts = Post::with('category')->orderBy('created_at', 'DESC')->get();
-        return view('admincp.post.index')->with(compact('posts'));
+        $this->postService = $postService;
+    }
+
+    public function index(Category $category)
+    { 
+        $category = Category::orderBy('created_at', 'DESC')->get();
+        $this->viewData['posts'] = $this->postService->listPost();
+        return view('admincp.post.index', $this->viewData, compact('category'));
     }
     
     public function create()
     {
         $category = Category::orderBy('created_at', 'DESC')->get();
-        return view('admincp.post.create_post')->with(compact('category'));
+        return view('admincp.post.create')->with(compact('category'));
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-       
-        $data = $request->all();
-        $post = new Post();
-        $post->name_post = $data['name_post'];
-        $post->title_post = $data['title_post'];
-        $post->desc = $data['desc'];
-        $post->cate_id = $data['cate_id'];
-        $post->save();
-        return back()->with('success', 'Sửa thành công');
+        $this->postService->create($request->all());
+        return back()->with('success', 'Thêm thành công');
     }
 
-    public function show($id)
+    public function edit(Post $post, Category $category)
     {
-        //
+        $category = Category::orderBy('created_at', 'DESC')->get();
+        return view('admincp.post.edit',compact('post'), compact('category') );
     }
 
-    public function edit($id)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+     $this->postService->update($post, $request->all());
+            return redirect()->back()->with('success', 'Sửa thành công');
     }
 
-    public function update(Request $request, $id)
+    public function destroy(Post $post)
     {
-        //
-    }
-
-    public function destroy($id)
-    {
-        Post::where('post_id',$id)->delete();
+        $this->postService->delete($post);
         return back()->with('success', 'Xóa thành công');
     }
 }

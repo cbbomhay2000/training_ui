@@ -9,14 +9,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('category.store') }}">
                             @csrf
-                            @if (Session::has('success'))
-                                <div class="alert alert-success">
-                                    {{ Session::get('success') }};
-                                    @php
-                                        Session::forget('success');
-                                    @endphp
-                                </div>
-                            @endif
+                           
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tiêu đề danh mục</label>
                                 <input type="text" class="form-control" name="cate_name" placeholder="Tiêu đề...."

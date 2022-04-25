@@ -7,9 +7,12 @@
                 <div class="card">
                     <div class="card-header">{{ __('Danh mục bài viết') }}</div>
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                        @if (Session::has('success'))
+                            <div class="alert alert-success">
+                                {{ Session::get('success') }};
+                                @php
+                                    Session::forget('success');
+                                @endphp
                             </div>
                         @endif
                         <table class="table">
@@ -21,29 +24,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
-                                {{dd($category)}}
+                                @foreach ($categories as $key => $category)
                                     <tr>
-                                        <td>{{ $category->cate_name }}
+                                        <td>{{ $key }}</td>
+                                        <td>{{ $category->cate_name }}</td>
                                         <td>
-                                            <a class="btn btn-success"
-                                                href="{{ route('category.edit', $category) }}">Edit</a>
-                                            <form action="{{ route('category.destroy', $category) }}"
-                                                method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <input class="btn btn-danger" type="submit" value="Delete" />
-                                            </form>
+                                            <div class="row">
+                                                <div class="col-md-2"><a class="btn btn-success"
+                                                        href="{{ route('category.edit', $category) }}">
+                                                        Edit</a></div>
+                                                <div class="col-md-2">
+                                                    <form action="{{ route('category.destroy', $category) }}"
+                                                        method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <input class="btn btn-danger" type="submit" value="Delete" />
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="clearfix w-100">
-                        <div class="d-flex justify-content-center">
-                            {{-- {!! $category->links() !!} --}}
-                        </div>
                     </div>
                 </div>
             </div>

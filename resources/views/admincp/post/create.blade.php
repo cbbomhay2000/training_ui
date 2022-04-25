@@ -11,7 +11,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 @include('layouts.app')
-<body class="leading-normal bg-bluish-gray dark:bg-brand-dark-grey-900">
+<body class="leading-normal bg-bluish-gray dark:bg-brand-dark-grey-700">
     <div class="flex flex-row items-start flex-grow-0 w-full max-w-full">
         <div class="flex-1 w-full max-w-full lg:w-auto lg:pl-5" style="padding-left: 0px;">
             <div class="flex flex-col flex-grow-0 w-full pb-24">
@@ -25,15 +25,25 @@
                             <form class="user" action="{{ route('post.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+                                @if (Session::has('success'))
+                                <div class="alert alert-success">
+                                    {{ Session::get('success') }};
+                                    @php
+                                        Session::forget('success');
+                                    @endphp
+                                </div>
+                            @endif
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail"
                                         aria-describedby="emailHelp" placeholder=" đề bài viết" name="name_post"
-                                        value="{{ old('name_post') }}">
+                                        value="{{ old('name_post') }}"
+                                        @error('name_post') is-invalid @enderror required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail"
                                         aria-describedby="emailHelp" placeholder="Mô tả bài viết" name="desc"
-                                        value="{{ old('desc') }}">
+                                        value="{{ old('desc') }}"
+                                        @error('desc') is-invalid @enderror required>
                                 </div>
                                 <div class="form-group">
                                     <select name="cate_id" class="form-control custom-select">

@@ -14,7 +14,7 @@ class CategoryService extends BaseService
 
     public function listCategory()
     {
-        return $this->model->orderBy('created_at', 'DESC')->paginate(2);
+        return $this->model->orderBy('created_at', 'DESC')->paginate(10);
     }
 
     public function update($category, $request)
@@ -25,5 +25,9 @@ class CategoryService extends BaseService
     public function create($request)
     {
         return $this->model->create($request);
+    }
+
+    public function delete($category){
+        return $category->delete($category);
     }
 }
