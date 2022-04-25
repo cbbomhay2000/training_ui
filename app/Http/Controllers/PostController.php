@@ -14,11 +14,10 @@ class PostController extends Controller
         $this->postService = $postService;
     }
 
-    public function index(Category $category)
+    public function index()
     { 
-        $category = Category::orderBy('created_at', 'DESC')->get();
         $this->viewData['posts'] = $this->postService->listPost();
-        return view('admincp.post.index', $this->viewData, compact('category'));
+        return view('admincp.post.index', $this->viewData);
     }
     
     public function create()

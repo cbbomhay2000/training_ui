@@ -5,7 +5,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Services\CategoryService;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -28,9 +27,9 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         if ($this->categoryService->create($request->all())) {
-            return redirect()->back()->with('success', 'Them moi thành công');
+            return redirect()->back()->with('success', 'Thêm mới thành công');
         }
-        return redirect()->back()->with('failed', 'Them moi k thành công');
+        return redirect()->back()->with('failed', 'Thêm mới không thành công');
     }
 
     public function edit(Category $category)

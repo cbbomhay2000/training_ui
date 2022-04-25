@@ -21,7 +21,6 @@ class PostRequest extends FormRequest
             'desc' =>[
                 'required',
             ],
-
         ];
     }
 }
