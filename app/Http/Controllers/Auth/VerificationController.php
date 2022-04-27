@@ -3,9 +3,9 @@
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+
 class VerificationController extends Controller
 {
-
     use VerifiesEmails;
     protected $redirectTo = RouteServiceProvider::HOME;
     public function __construct()
