@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use App\Http\Requests\ChangePasswordRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
@@ -26,12 +25,12 @@ class HomeController extends Controller
         $user = User::find(Auth::user()->id);
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->with('fail', 'Da say ra loi');
+            return redirect()->back()->with('fail', 'Lỗi');
         }
 
         $user->update([
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->back()->with('success', 'password successfully updated');
+        return redirect()->back()->with('success', 'Cập nhập mật khẩu thành công');
     }
 }

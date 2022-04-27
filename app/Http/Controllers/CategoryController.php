@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Models\Post;
 use App\Services\CategoryService;
 
 class CategoryController extends Controller
@@ -16,17 +16,19 @@ class CategoryController extends Controller
     public function index()
     {
         $this->viewData['categories'] = $this->categoryService->listCategory();
-        return view('admincp.category.index', $this->viewData);
+
+        return view('admin.category.index', $this->viewData);
     }
 
     public function create()
     {
-        return view('admincp.category.create');
+        return view('admin.category.create');
     }
 
     public function store(CategoryRequest $request)
     {
         if ($this->categoryService->create($request->all())) {
+
             return redirect()->back()->with('success', 'Thêm mới thành công');
         }
         return redirect()->back()->with('failed', 'Thêm mới không thành công');
@@ -34,12 +36,13 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('admincp.category.edit', compact('category'));
+        return view('admin.category.edit', compact('category'));
     }
 
-    public function update(CategoryRequest $request, Category $category) // form request va model binding
+    public function update(CategoryRequest $request, Category $category)
     {
         if ($this->categoryService->update($category, $request->all())) {
+
             return redirect()->back()->with('success', 'Sửa thành công');
         }
         return redirect()->back()->with('failed', 'Sửa thất bại');
@@ -48,6 +51,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $this->categoryService->delete($category);
-        return back()->with('success', 'Xóa thành công') ;
+
+        return back()->with('success', 'Xóa thành công');
     }
 }

@@ -6,9 +6,9 @@ class Post extends Model
 {
         public $timestamps = false; 
         protected $fillable = [
-            "name_post", "title_post", "desc", "cate_id"
+            "name_post", "title_post", "desc", "image_post", "cate_id"
         ];
-        protected $primarukey = 'id';
+        protected $primarykey = 'id';
         protected $table = 'posts';
 
         public function category(){
