@@ -27,7 +27,8 @@ class PostService extends BaseService
         return $this->model->create($request);
     }
 
-    public function delete($post){
+    public function delete($post)
+    {
         return $post->delete($post);
     }
 }

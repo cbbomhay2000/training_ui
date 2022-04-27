@@ -27,7 +27,8 @@ class CategoryService extends BaseService
         return $this->model->create($request);
     }
 
-    public function delete($category){
+    public function delete($category)
+    {
         return $category->delete($category);
     }
 }
