@@ -13,7 +13,7 @@
 @include('layouts.app')
 <body class="leading-normal bg-bluish-gray dark:bg-brand-dark-grey-700">
     <div class="flex flex-row items-start flex-grow-0 w-full max-w-full">
-        <div class="flex-1 w-full max-w-full lg:w-auto lg:pl-5" style="padding-left: 0px;">
+        <div class="flex-1 w-full max-w-full lg:w-auto lg:pl-5">
             <div class="flex flex-col flex-grow-0 w-full pb-24">
                 <div class="overflow-hidden border rounded-t-lg dark:border-brand-grey-800">
                     <div
@@ -22,8 +22,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Viết Bài!</h1>
                             </div>
-                            <form class="user" action="{{ route('post.store') }}" method="POST"
-                                enctype="multipart/form-data">
+                            <form class="user" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @if (Session::has('success'))
                                 <div class="alert alert-success">
@@ -47,14 +46,13 @@
                                 </div>
                                 <div class="form-group">
                                     <select name="cate_id" class="form-control custom-select">
-                                        @foreach ($category as $key => $cate)
-                                            <option value="{{ $cate->id }}">
-                                                {{ $cate->cate_name }}
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->cate_name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <input type="file" name="image_post">
                                 <div class="form-group">
                                     <textarea class="form-control" name="title_post" id="summernote"></textarea>
                                 </div>

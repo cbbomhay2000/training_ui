@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public $timestamps = false; 
     protected $fillable = [
     "cate_name"
     ];
-    protected $primarykey = 'id';
-    protected $table = 'categories';
-
+    
     public function post(){
         return $this->hasMany(Post::class, 'cate_id');
     }

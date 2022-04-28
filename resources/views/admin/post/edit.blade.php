@@ -13,7 +13,7 @@
 @include('layouts.app')
 <body class="leading-normal bg-bluish-gray dark:bg-brand-dark-grey-700">
     <div class="flex flex-row items-start flex-grow-0 w-full max-w-full">
-        <div class="flex-1 w-full max-w-full lg:w-auto lg:pl-5" style="padding-left: 0px;">
+        <div class="flex-1 w-full max-w-full lg:w-auto lg:pl-5">
             <div class="flex flex-col flex-grow-0 w-full pb-24">
                 <div class="overflow-hidden border rounded-t-lg dark:border-brand-grey-800">
                     <div
@@ -38,9 +38,9 @@
                                 </div>
                                 <div class="form-group">
                                     <select name="cate_id" class="form-control custom-select">
-                                        @foreach ($category as $key => $cate)
+                                        @foreach ($categories as $category)
                                             <option value="{{ $post->cate_id }}">
-                                                {{ $cate->cate_name }}
+                                                {{ $category->cate_name }}
                                             </option>
                                         @endforeach
                                     </select>

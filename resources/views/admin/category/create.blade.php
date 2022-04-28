@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Thêm Danh mục bài viết') }}</div>
+                    <div class="card-header">Thêm Danh mục bài viết</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('category.store') }}">
                             @csrf

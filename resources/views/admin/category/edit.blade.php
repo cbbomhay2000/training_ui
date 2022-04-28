@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Cập nhập Danh mục bài viết') }}</div>
+                    <div class="card-header">Cập nhập Danh mục bài viết</div>
                     <div class="card-body">
                         <form autocapitalize="off" method="POST" action="{{ route('category.update', $category) }}">
                             @if (Session::has('success'))

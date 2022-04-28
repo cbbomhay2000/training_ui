@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Liệt kê bài viết') }}</div>
+                    <div class="card-header">Liệt kê bài viết</div>
                     <div class="card-body">
                         @if (Session::has('success'))
                             <div class="alert alert-success">
@@ -21,7 +21,7 @@
                                     <th scope="col">Tên bài viết</th>
                                     <th scope="col">Mô tả</th>
                                     <th scope="col">Danh Muc</th>
-                                    <th scope="col">Thao Tac</th>
+                                    <th scope="col">Thao Tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,7 +31,6 @@
                                         <td>{{ $post->name_post }}</td>
                                         <td>{{ $post->desc }}</td>
                                         <td>{{ $post->category->cate_name }}</td>
-                                        <td>src="{{ url('public/uploads/') }}/{{ $post->image_post }}"</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-md-5">

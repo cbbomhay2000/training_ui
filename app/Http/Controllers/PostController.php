@@ -22,9 +22,9 @@ class PostController extends Controller
     
     public function create()
     {
-        $category = Category::orderBy('created_at', 'DESC')->get();
+        $categories= Category::orderBy('created_at', 'DESC')->get();
 
-        return view('admin.post.create')->with(compact('category'));
+        return view('admin.post.create')->with(compact('categories'));
     }
 
     public function store(PostRequest $request)
@@ -37,8 +37,7 @@ class PostController extends Controller
     public function edit(Post $post, Category $category)
     {
         $category = Category::orderBy('created_at', 'DESC')->get();
-
-        return view('admin.post.edit',compact('post'), compact('category'));
+        return view('admin.post.edit',compact('post'))->with(compact('category'));
     }
 
     public function update(PostRequest $request, Post $post)
