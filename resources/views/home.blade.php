@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <a class="btn btn-primary" href="{{ route('show.index') }}">Liệt kê bài viết</a>
                 </div>
             </div>
         </div>
