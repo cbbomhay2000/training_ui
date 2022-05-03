@@ -15,14 +15,17 @@
                         @endif
                         @foreach ($posts as $post)
                             <div class="single-products">
-                                <div class="productinfo text-center">
+                                <div class="productinfo">
                                     <form action="">
                                         @csrf
                                         <p>
-                                            <h2>{{$post->name_post}}</h2>
+                                            <h2>{{$post->title_post}}</h2>
                                         </p>
                                         <p>
-                                            <h2>{{$post->category->cate_name}}</h2>
+                                            {{$post->desc}}
+                                        </p>
+                                        <p>
+                                            <h6>{{$post->category->cate_name}}</h6><a href="">xem thêm</a>
                                         </p>
                                     </form>
                                 </div> 
