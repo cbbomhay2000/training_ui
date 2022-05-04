@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Services\ShowService;
 use Illuminate\Http\Request;
 
@@ -18,8 +19,8 @@ class ShowController extends Controller
      */
     public function index()
     {
-        $this->viewData['posts'] = $this->showService->showPost();
-        return view('user.show', $this->viewData);
+        $this->viewData['posts'] = $this->showService->index();
+        return view('user.list', $this->viewData);
     }
 
     /**
@@ -49,9 +50,10 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        
+        $this->viewData['posts'] = $this->showService->show();
+        return view('user.show', $this->viewData)->with(compact('post'));
     }
 
     /**

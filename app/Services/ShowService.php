@@ -11,8 +11,12 @@ class ShowService extends BaseService
     {
         $this->model = $model;
     }
-    public function showPost()
+    public function index()
     {
         return $this->model->orderBy('created_at', 'DESC')->paginate(10);
+    }
+    public function show()
+    {
+        return $this->model->orderBy('created_at', 'DESC')->take(1)->get();
     }
 }

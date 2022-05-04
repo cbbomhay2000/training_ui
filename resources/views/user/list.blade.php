@@ -5,6 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
+                    <div class="card-header"><h2>Danh mục bài viết</h2></div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -16,9 +17,16 @@
                                 <div class="productinfo m-3">
                                     <form action="{{ route('show.show', $post) }}">
                                         @csrf
-                                        <h4>{{ $post->category->cate_name }}</h4>
-                                        <h2>{{ $post->name_post }}</h2>
-                                        {{$post->title_post}}
+                                        <p>
+                                        <h4>{{ $post->name_post }}</h4>
+                                        </p>
+                                        <p>
+                                            {{ $post->desc }}
+                                        </p>
+                                        <p><b>
+                                                {{ $post->category->cate_name }}
+                                            </b><a href="{{ route('show.show', $post) }}">Xem thêm</a></p>
+ 
                                         <hr>
                                     </form>
                                 </div>
