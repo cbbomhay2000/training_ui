@@ -11,23 +11,26 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        @foreach ($posts as $post)
-                            <div class="single-products">
-                                <div class="productinfo m-3">
-                                    <form action="{{ route('show.show', $post) }}">
-                                        @csrf
-                                        <h4>{{ $post->category->cate_name }}</h4>
-                                        <h2>{{ $post->name_post }}</h2>
-                                        {{$post->title_post}}
-                                        <hr>
-                                    </form>
-                                </div>
-                            </div>
-                        @endforeach
-
+                        <h4>{{ $posts->category->cate_name }}</h4>
+                        <h2>{{ $posts->name_post }}</h2>
+                        {!! $posts->title_post !!}
                     </div>
                 </div>
             </div>
+            @include('user.commentsDisplay', ['comments' => $posts->comments, 'post_id' => $posts->id])
+   
+                    <hr />
+                    <h4>Add comment</h4>
+                    <form method="post" action="{{ route('comments.store'   ) }}">
+                        @csrf
+                        <div class="form-group">
+                            <textarea class="form-control" name=body></textarea>
+                            <input type=hidden name=post_id value="{{ $post->id }}" />
+                        </div>
+                        <div class="form-group">
+                            <input type=submit class="btn btn-success" value="Add Comment" />
+                        </div>
+                    </form>
         </div>
     </div>
 @endsection
@@ -36,6 +39,5 @@
         float: right;
         margin-right: 20px;
     }
+
 </style>
-
-

@@ -50,10 +50,11 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($show)
     {
-        $this->viewData['posts'] = $this->showService->show();
-        return view('user.show', $this->viewData)->with(compact('post'));
+        // $posts = Post::where('id', '=', $show)->select('*')->first();
+        $posts = Post::find($show);
+        return view('user.show')->with(compact('posts'));
     }
 
     /**

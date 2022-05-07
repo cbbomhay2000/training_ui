@@ -43,3 +43,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::resources([
     'show' => 'App\Http\Controllers\ShowController',
 ]);
+Route::resources([
+    'comments' => 'App\Http\Controllers\CommentController',
+]);
