@@ -2,21 +2,27 @@
 
 namespace App\Services;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Services\BaseService;
 
 class ShowService extends BaseService
 {
-    public function __construct(Post $model)
+    public function __construct(Post $model, Comment $comment)
     {
         $this->model = $model;
+        $this->comment = $comment;
+
     }
     public function index()
     {
         return $this->model->orderBy('created_at', 'DESC')->paginate(10);
     }
-    public function show()
+    
+    public function commentPost($request)
     {
-        return $this->model->orderBy('created_at', 'DESC')->take(1)->get();
+        $request['user_id'] = auth()->user()->id;
+    
+        return $this->comment->create($request);
     }
 }

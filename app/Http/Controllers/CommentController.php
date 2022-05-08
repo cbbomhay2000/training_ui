@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ShowRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
+    public function store(ShowRequest $request)
     {
-    	$request->validate([
-            'body'=>'required',
-        ]);
-   
-        $input = $request->all();
-        $input['user_id'] = auth()->user()->id;
-    
-        Comment::create($input);
-   
-        return back();
+        if ($this->ShowService->commentPost($request->all())) {
+            return back()->with('success', 'comment thành công');
+        }
+
+        return back()->with('success', 'comment thất bại');
     }
 }
