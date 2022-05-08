@@ -1,28 +1,35 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Models\User;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         return view('home');
+    }
+    public function reset()
+    {
+        return view('auth.passwords.resetpassword');
+    }
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('fail', 'Lỗi');
+        }
+
+        $user->update(['password' => Hash::make($request->password),]);
+        return redirect()->back()->with('success', 'Cập nhập mật khẩu thành công');
     }
 }

@@ -1,32 +1,21 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/resetpassword', [HomeController::class, 'reset'])->name('reset');
+Route::post('/change/password', [HomeController::class, 'changePassword'])->name('profile.change.password');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-//thông báo đăng ký tài khoản cho email cho email
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -49,3 +38,8 @@ Route::resources([
 
 Route::get('search', 'SearchController@getSearch');
 Route::post('search/name', 'SearchController@getSearchAjax')->name('search');
+
+Route::resources([
+    'post' => 'App\Http\Controllers\PostController',
+    'category' => 'App\Http\Controllers\CategoryController',
+]);
