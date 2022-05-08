@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
@@ -14,43 +15,51 @@ class PostController extends Controller
     }
 
     public function index()
-    { 
+    {
         $this->viewData['posts'] = $this->postService->listPost();
 
         return view('admin.post.index', $this->viewData);
     }
-    
+
     public function create()
     {
-        $categories= Category::orderBy('created_at', 'DESC')->get();
+        $this->viewData['categories'] = Category::orderBy('created_at', 'DESC')->get();
 
-        return view('admin.post.create')->with(compact('categories'));
+        return view('admin.post.create', $this->viewData);
     }
 
     public function store(PostRequest $request)
     {
-        $this->postService->create($request->all());
-
-        return back()->with('success', 'Thêm thành công');
+        if (  $this->postService->create($request->all())) {
+            return back()->with('success', 'Thêm thành công');
+        }
+      
+        return back()->with('success', 'Thêm thất bại');
     }
 
-    public function edit(Post $post, Category $category)
+    public function edit(Post $post)
     {
-        $category = Category::orderBy('created_at', 'DESC')->get();
-        return view('admin.post.edit',compact('post'))->with(compact('category'));
+        $this->viewData['categories'] = Category::orderBy('created_at', 'DESC')->get();
+        $this->viewData['post'] = $post;
+
+        return view('admin.post.edit', $this->viewData);
     }
 
     public function update(PostRequest $request, Post $post)
     {
-     $this->postService->update($post, $request->all());
-
+        if ($this->postService->update($post, $request->all())) {
             return redirect()->back()->with('success', 'Sửa thành công');
+        }
+
+        return redirect()->back()->with('failed', 'Sửa thất bại');
     }
 
     public function destroy(Post $post)
     {
-        $this->postService->delete($post);
-
-        return back()->with('success', 'Xóa thành công');
+        if($this->postService->delete($post)){
+            return back()->with('success', 'Xóa thành công');
+        }
+        
+        return back()->with('failed', 'Xóa thất bại');
     }
 }

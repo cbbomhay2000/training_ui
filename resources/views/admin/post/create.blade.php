@@ -1,8 +1,10 @@
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Viết bài</title>
-    <link rel="stylesheet" type="text/css" id="style-ref"href="https://hashnode.com/static/css/app.min.css?v=1625504643155">
+    <link rel="stylesheet" type="text/css" id="style-ref"
+        href="https://hashnode.com/static/css/app.min.css?v=1625504643155">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -20,27 +22,20 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Viết Bài!</h1>
                             </div>
-                            <form class="user" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="user" action="{{ route('post.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
-                                @if (Session::has('success'))
-                                <div class="alert alert-success">
-                                    {{ Session::get('success') }};
-                                    @php
-                                        Session::forget('success');
-                                    @endphp
-                                </div>
-                            @endif
+                                @include('layouts.notice')
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail"
                                         aria-describedby="emailHelp" placeholder=" đề bài viết" name="name_post"
-                                        value="{{ old('name_post') }}"
-                                        @error('name_post') is-invalid @enderror required>
+                                        value="{{ old('name_post') }}" @error('name_post') is-invalid @enderror
+                                        required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail"
                                         aria-describedby="emailHelp" placeholder="Mô tả bài viết" name="desc"
-                                        value="{{ old('desc') }}"
-                                        @error('desc') is-invalid @enderror required>
+                                        value="{{ old('desc') }}" @error('desc') is-invalid @enderror required>
                                 </div>
                                 <div class="form-group">
                                     <select name="cate_id" class="form-control custom-select">
@@ -79,4 +74,5 @@
         })
     });
 </script>
+
 </html>

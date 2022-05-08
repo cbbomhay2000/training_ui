@@ -7,14 +7,6 @@
                 <div class="card">
                     <div class="card-header">Danh mục bài viết</div>
                     <div class="card-body">
-                        @if (Session::has('success'))
-                            <div class="alert alert-success">
-                                {{ Session::get('success') }};
-                                @php
-                                    Session::forget('success');
-                                @endphp
-                            </div>
-                        @endif
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>

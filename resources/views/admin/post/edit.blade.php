@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Viết bài</title>
@@ -11,6 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 @include('layouts.app')
+
 <body class="leading-normal bg-bluish-gray dark:bg-brand-dark-grey-700">
     <div class="flex flex-row items-start flex-grow-0 w-full max-w-full">
         <div class="flex-1 w-full max-w-full lg:w-auto lg:pl-5">
@@ -21,11 +23,12 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Sửa bài viết!</h1>
-                            </div>
+                            </div>        
                             <form class="user" action="{{ route('post.update', $post) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
+                                @include('layouts.notice')
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail"
                                         aria-describedby="emailHelp" placeholder=" đề bài viết" name="name_post"
@@ -39,14 +42,18 @@
                                 <div class="form-group">
                                     <select name="cate_id" class="form-control custom-select">
                                         @foreach ($categories as $category)
-                                            <option value="{{ $post->cate_id }}">
+                                            <option value="{{ $post->cate_id }}"
+                                                {{ $category->id == $post->cate_id ? 'selected' : '' }}>
                                                 {{ $category->cate_name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="form-group">
-                                    <textarea class="form-control" name="title_post" id="summernote"></textarea>
+                                    <textarea class="form-control" name="title_post" id="summernote">
+                                        {!! $post->title_post !!}
+                                    </textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Đăng Bài
@@ -123,4 +130,5 @@
         })
     });
 </script>
+
 </html>

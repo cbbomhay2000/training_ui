@@ -28,30 +28,34 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         if ($this->categoryService->create($request->all())) {
-
             return redirect()->back()->with('success', 'Thêm mới thành công');
         }
+
         return redirect()->back()->with('failed', 'Thêm mới không thành công');
     }
 
     public function edit(Category $category)
     {
-        return view('admin.category.edit', compact('category'));
+        $this->viewData['categories'] =  $category;
+        
+        return view('admin.category.edit');
     }
 
     public function update(CategoryRequest $request, Category $category)
     {
         if ($this->categoryService->update($category, $request->all())) {
-
             return redirect()->back()->with('success', 'Sửa thành công');
         }
+
         return redirect()->back()->with('failed', 'Sửa thất bại');
     }
 
     public function destroy(Category $category)
     {
-        $this->categoryService->delete($category);
+        if ($this->categoryService->delete($category)) {
+            return back()->with('success', 'Xóa thành công');
+        }
 
-        return back()->with('success', 'Xóa thành công');
+        return back()->with('failed', 'Xóa thất bại');
     }
 }
