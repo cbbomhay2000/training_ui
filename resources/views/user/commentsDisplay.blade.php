@@ -1,5 +1,5 @@
-@foreach($comments as $comment)
-    <div class="display-comment" @if($comment->parent_id != null) style="margin-left:40px;" @endif>
+@foreach ($comments as $comment)
+    <div class="display-comment" @if ($comment->parent_id != null) style="margin-left:40px;" @endif>
         <strong>{{ $comment->user->name }}</strong>
         <p>{{ $comment->body }}</p>
         <a href="" id="reply"></a>
@@ -11,9 +11,11 @@
                 <input type=hidden name=parent_id value="{{ $comment->id }}" />
             </div>
             <div class="form-group">
-                <input type=submit class="btn btn-warning" value="Reply" />
+                <button type="button" class="btn btn-link p-0">
+                    Reply
+                </button>
             </div>
         </form>
-        @include('posts.commentsDisplay', ['comments' => $comment->replies])
+        @include('user.commentsDisplay', ['comments' => $comment->replies])
     </div>
 @endforeach
