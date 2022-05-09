@@ -29,6 +29,15 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+Route::resources([
+    'show' => 'App\Http\Controllers\ShowController',
+]);
+Route::resources([
+    'comments' => 'App\Http\Controllers\CommentController',
+]);
+
+// Route::get('search', 'SearchController@getSearch');
+// Route::post('search/name', 'SearchController@getSearchAjax')->name('search');
 
 Route::resources([
     'post' => 'App\Http\Controllers\PostController',

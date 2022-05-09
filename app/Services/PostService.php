@@ -24,6 +24,8 @@ class PostService extends BaseService
 
     public function create($request)
     {
+        $request['author_id'] = auth()->user()->id;
+        
         return $this->model->create($request);
     }
 

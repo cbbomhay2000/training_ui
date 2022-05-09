@@ -16,6 +16,7 @@
                         <a class="btn btn-success" href="{{ route('category.index') }}">Danh sách danh mục</a>
                         <a class="btn btn-primary" href="{{ route('post.create') }}">Viết bài</a>
                         <a class="btn btn-primary" href="{{ route('post.index') }}">Liệt kê bài viết</a>
+                        <a class="btn btn-primary" href="{{ route('show.index') }}">Danh sách bài viết</a>
                     </div>
                 </div>
             </div>
