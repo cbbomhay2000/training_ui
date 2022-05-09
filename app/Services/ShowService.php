@@ -12,17 +12,19 @@ class ShowService extends BaseService
     {
         $this->model = $model;
         $this->comment = $comment;
-
     }
-    public function index()
+    public function index($keyword)
     {
-        return $this->model->orderBy('created_at', 'DESC')->paginate(10);
+        return $this->model->where('name_post', 'LIKE', '%' . $keyword . '%')
+            ->orWhereHas('author', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%' . $keyword . '%');
+            })->orderBy('created_at', 'DESC')->paginate(10);
     }
-    
+
     public function commentPost($request)
     {
         $request['user_id'] = auth()->user()->id;
-    
+
         return $this->comment->create($request);
     }
 }

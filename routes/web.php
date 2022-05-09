@@ -36,8 +36,8 @@ Route::resources([
     'comments' => 'App\Http\Controllers\CommentController',
 ]);
 
-Route::get('search', 'SearchController@getSearch');
-Route::post('search/name', 'SearchController@getSearchAjax')->name('search');
+// Route::get('search', 'SearchController@getSearch');
+// Route::post('search/name', 'SearchController@getSearchAjax')->name('search');
 
 Route::resources([
     'post' => 'App\Http\Controllers\PostController',

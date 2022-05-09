@@ -11,11 +11,26 @@
                 <input type=hidden name=parent_id value="{{ $comment->id }}" />
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-link p-0">
+                <a type="submit" onClick=hellYeah() class="btn btn-link p-0 text-decoration-none" id="reply">
                     Reply
-                </button>
+                </a>
             </div>
         </form>
         @include('user.commentsDisplay', ['comments' => $comment->replies])
     </div>
 @endforeach
+
+
+<script>
+    // $('#reply').click(function(ev) {
+    //     console.log(ev);
+    //     console.log(123);
+    //     $('.hidden').addClass('show').removeClass('hidden');
+    // })
+    function hellYeah() {
+        console.log('asdasd');
+        console.log(123);
+        $('.hidden').addClass('show').removeClass('hidden');
+    }
+</script>
+

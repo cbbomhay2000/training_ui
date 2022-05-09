@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\PostService;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -14,9 +15,9 @@ class PostController extends Controller
         $this->postService = $postService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $this->viewData['posts'] = $this->postService->listPost();
+        $this->viewData['posts'] = $this->postService->listPost($request->search);
 
         return view('admin.post.index', $this->viewData);
     }
@@ -30,7 +31,7 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        if (  $this->postService->create($request->all())) {
+        if ($this->postService->create($request->all())) {
             return back()->with('success', 'Thêm thành công');
         }
       

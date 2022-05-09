@@ -22,6 +22,9 @@ class PostRequest extends FormRequest
             'desc' =>[
                 'required',
             ],
+            'cate_id' => [
+                'required',
+            ]
         ];
     }
 }

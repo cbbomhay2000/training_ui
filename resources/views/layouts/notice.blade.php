@@ -1,15 +1,17 @@
 @if (Session::has('success'))
     <div class="alert alert-success">
-        {{ Session::get('success') }};
+        {{ Session::get('success') }}
         @php
-            Session::forget('success');
+            Session::forget('success')
         @endphp
     </div>
-@else
+@endif
+
+@if (Session::has('failed'))
     <div class="alert alert-warning">
-        {{ Session::get('failed') }};
+        {{ Session::get('failed') }}
         @php
-            Session::forget('failed');
+            Session::forget('failed')
         @endphp
     </div>
 @endif

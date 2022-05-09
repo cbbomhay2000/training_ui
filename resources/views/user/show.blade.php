@@ -3,12 +3,6 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="form-group">
-                <input type="text" name="country_name" id="country_name" class="form-control input-lg"
-                    placeholder="Enter Country Name" />
-                <div id="countryList"><br>
-                </div>
-            </div>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
